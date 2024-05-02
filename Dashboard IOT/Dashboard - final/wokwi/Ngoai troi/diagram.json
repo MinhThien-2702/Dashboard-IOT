@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "author": "Nguyen Phan Quoc Anh",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 9.6, "left": 72.04, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -57.3,
+      "left": 205.8,
+      "attrs": { "humidity": "64.5", "temperature": "62.9" }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -35.2,
+      "left": -239.2,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -32.4,
+      "left": 359,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -118.8,
+      "left": 291.8,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": -234,
+      "left": 234.2,
+      "attrs": { "color": "yellow" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:SDA", "esp:4", "green", [ "v0" ] ],
+    [ "dht1:VCC", "esp:5V", "red", [ "v0" ] ],
+    [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "dht1:NC", "dht1:GND", "green", [ "v0" ] ],
+    [ "ldr1:GND", "esp:GND.2", "black", [ "h0" ] ],
+    [ "ldr1:VCC", "esp:5V", "red", [ "h76.8", "v249.6", "h9.6" ] ],
+    [ "esp:15", "led1:A", "green", [ "v-28.8", "h220.8" ] ],
+    [ "led1:C", "esp:GND.2", "green", [ "v0" ] ],
+    [ "ldr1:AO", "esp:34", "green", [ "h0" ] ],
+    [ "led2:C", "led1:C", "green", [ "v0" ] ],
+    [ "led2:A", "esp:16", "green", [ "v0" ] ],
+    [ "led3:C", "led2:C", "green", [ "v0" ] ],
+    [ "led3:A", "esp:21", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>outdoor</title>
+
+    <link rel="stylesheet" href="assets/css/outdoorcss.css">
+    <script src="assets/js/main.js" defer></script>
+
+    <!-- Load Chart.js library -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    <!-- Nhận dữ liệu từ firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <div class="navigation">
+        <ul>
+                <li class="logo-item">
+                    <a href="#">
+                        <span class="icon">
+                            <img src="assets/imgs/Hcmute-logo.png" alt="icon">
+                        </span>
+                        <span class="title">SMART HOME</span>
+                    </a>
+                </li>
+
+            <li>
+                <a href="index.html">
+                    <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="title">Phòng khách</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="bedroom.html"> 
+                    <span class="icon">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </span>
+                    <span class="title">Phòng ngủ</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="chatbubble-outline"></ion-icon>
+                    </span>
+                    <span class="title">Ngoài trời</span>
+                </a>
+            </li>
+
+
+            
+            <li>
+                <a href="https://wokwi.com/projects/395116280708057089" target="_blank">
+                    <span class="icon">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </span>
+                    <span class="title">Cài đặt</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="pass.html"> 
+                    <span class="icon">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </span>
+                    <span class="title">Đăng xuất</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+<!-- ========================= Main ==================== -->
+<!-- ===     Thiết lập nội dung trong phần Main      === -->
+<!-- =================================================== -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+        
+            <div class="notification">
+                <ion-icon name="notifications-outline"></ion-icon> <!-- Biểu tượng thông báo -->
+            </div>
+        
+            <div class="account">
+                <ion-icon name="person-circle-outline"></ion-icon> <!-- Biểu tượng tài khoản -->
+            </div>
+        </div>
+
+        <!-- tiêu đề chính của trang web -->
+        <div class="title-name">
+            <p><i>NGOÀI TRỜI</i></p>
+        </div>
+
+        <hr class="custom-hr">
+
+<!--------------------------------------------------- tạo thẻ cho nhiệt độ --------------------------------------------------->
+        <div class="container">
+            <div class="box-temperature">
+                <hr class="custom-hr-plus">
+                <img src="assets/img/fire.png" alt="Logo_fire" style="width:120px;height: 136px,">
+                <hr class="custom-hr-plus">
+                <h2>Nhiệt độ (&#8451;)</h2>
+                <h1 class="value" id="temperature"> null&#8451;</h1>
+            </div>
+            <div class="chart chart-Temp">
+                <canvas id="temperatureChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <hr class="custom-hr">
+<!--------------------------------------------------- tạo thẻ cho độ ẩm ---------------------------------------------------->
+        <div class="container">
+            <div class="chart chart-Humi">
+                <canvas id="humidityChart" width="400" height="200"></canvas>
+            </div>
+            <div class="box-humidity">
+                <hr class="custom-hr-plus">
+                <img src="assets/img/pngtree-water-drop-png-image_8920098.png" alt="Logo_water" style="width:120px;height: 136px,">
+                <hr class="custom-hr-plus">
+                <h2>Độ ẩm (%)</h2>
+                <h1 class="value" id="humidity"> null%</h1>
+            </div>
+        </div>
+        <hr class="custom-hr">
+<!--------------------------------------------------- tạo thẻ cho ánh sáng --------------------------------------------------->
+        <div class="container">
+            <div class="box-lux">
+                <hr class="custom-hr-plus">
+                <img src="assets/img/lux.jpg" alt="Logo_lux" style="width:330px;height: 330px,">
+                <hr class="custom-hr-plus">
+                <h2>Ánh sáng</h2>
+                <h1 class="value" id="lux"> null</h1>
+            </div>
+            <div class="chart chart-Lux">
+                <canvas id="luxChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <hr class="custom-hr">
+        <hr class="custom-hr">
+        <hr class="custom-hr">
+        <hr class="custom-hr">
+        <hr class="custom-hr">
+<!--------------------------------------------------- FOOTER ------------------------------------------------------------------->
+        <footer class="footer">
+            <table class="table">
+                <tr>
+                    <td class="sqr address">
+                        <p><a href="https://maps.app.goo.gl/3oys3jHJ9VvoxC2u9" target="_blank">
+                            Trường đại học Sư phạm kỹ thuật thành phố Hồ Chí Minh.
+                        </a></p>
+                    </td>
+                    <td class="sqr inform">
+                        <p>Thực tập cơ sở ứng dụng IOT<br/>Thành viên thực hiện</p>
+                    </td>
+                    <td class="sqr inform1">
+                        <p>Huỳnh Tấn Tài<br/>Mssv: 21119354</p>
+                    </td>
+                    <td class="sqr inform2">
+                        <p>Nguyễn Thiên Tài<br/>Mssv: 21119355</p>
+                    </td>
+                    <td class="sqr inform3">
+                        <p>Nguyễn Minh Thiện<br/>Mssv: 21119358</p>
+                    </td>
+                </tr>
+            </table>        
+            <hr>
+            <div class="support-info">
+                <ul class="support-list">
+                    <li><a href="https://www.facebook.com/huynhtantai2502" target="_blank" >Liên hệ hỗ trợ</a></li>
+                    <li><a>||</a></li>
+                    <li>Số điện thoại tiếp nhận khiếu nại: <a href="tel:0123456789">0123456789</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+
+
+<!--------------------------------------------------- FIREBASE ------------------------------------------------------------------->   
+    <script type="module">
+    // Nhập các chức năng bạn cần từ SDK bạn cần
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+
+    // Cấu hình Firebase của ứng dụng web của bạn tại đây (Không sử dụng cấu hình hiện có)
+    const firebaseConfig = {
+    apiKey: "AIzaSyDIyRrLe3oo3yomPvyaq_dXESagra71WDw",
+    authDomain: "dht11-f8fe7.firebaseapp.com",
+    databaseURL: "https://dht11-f8fe7-default-rtdb.firebaseio.com",
+    projectId: "dht11-f8fe7",
+    storageBucket: "dht11-f8fe7.appspot.com",
+    messagingSenderId: "353711291899",
+    appId: "1:353711291899:web:7f15e3ade9f7d59397df5e",
+    measurementId: "G-B0969Q45MS"
+    };
+
+    // Initialize Firebase// khởi tạo Firebase---------------------------------------------------------------------------------------------------------------------
+        firebase.initializeApp(firebaseConfig);
+
+    // getting reference to the database// lấy tham chiếu đến cơ sở dữ liệu----------------------------------------------------------------------------------------
+        var database = firebase.database();
+
+    // Xác định mảng để lưu trữ dữ liệu nhiệt độ và độ ẩm----------------------------------------------------------------------------------------------------------
+        var temperatureData = [];
+        var humidityData = [];
+        var luxData = [];
+    //Kết thúc tạo mảng--------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Getting reference to the data we want--Đọc dữ liệu từ firebase----------------------------------------------------------------------------------------------
+        var temperatureRef = database.ref('ngoai_troi/nhiet do');
+        var humidityRef = database.ref('ngoai_troi/do am');
+        var luxRef = database.ref('ngoai_troi/do sang');
+
+    //Kết thúc đọc dữ liệu-----------------------------------------------------------------------------------------------------------------------------------------
+
+    //Tìm nạp dữ liệu -----------------------------------------------------------------------------------------------------------------------------------------
+        temperatureRef.on('value', function(snapshot) {
+            temperatureData = snapshot.val();
+            updateTemperatureChart(temperatureData);
+            document.getElementById('temperature').innerHTML = temperatureData; // đưa giá trị của temperatureData vào 'temperature' để hiển thị
+        });
+
+        humidityRef.on('value', function(snapshot) {
+            humidityData = snapshot.val();
+            updateHumidityChart(humidityData);
+            document.getElementById('humidity').innerHTML = humidityData;
+        });
+
+        luxRef.on('value', function(snapshot) {
+            luxData = snapshot.val();
+            updateLuxChart(luxData);
+            document.getElementById('lux').innerHTML = luxData;
+        });
+
+    //Kết thúc nạp dữ liệu---------------------------------------------------------------------------------------------------------------------------------------
+
+        // Khai báo biến global cho biểu đồ
+        var temperatureChart;
+        var humidityChart;
+        var luxChart;
+
+    // Gọi hàm updateTemperatureChart và updateHumidityChart khi cần thiết
+        function updateTemperatureChart(temp) {
+            const time = new Date().toLocaleTimeString(); // Lấy thời gian hiện tại
+
+            // Kiểm tra nếu biểu đồ nhiệt độ chưa được khởi tạo
+            if (!temperatureChart) {
+                // Nếu chưa, khởi tạo biểu đồ nhiệt độ mới
+                temperatureChart = new Chart("temperatureChart", {
+                    type: "line", // Chọn loại biểu đồ là biểu đồ đường
+                    data: {
+                        labels: [time], // Sử dụng thời gian làm nhãn trục x
+                        datasets: [{
+                            label: 'Temperature (°C)',
+                            borderColor: 'red',
+                            data: [temp]
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time', // Sử dụng kiểu dữ liệu thời gian cho trục x
+                                time: {
+                                    unit: 'minute' // Đơn vị thời gian là phút
+                                }
+                            },
+                            y: { // Cấu hình trục tung
+                                title: {
+                                    display: true,
+                                    text: 'Temperature (°C)' // Đặt tiêu đề của trục tung
+                                }
+                            }
+                        },
+                        legend: { display: true },
+                        title: {
+                            display: true,
+                            text: "Temperature Data Over Time"
+                        }
+                    }
+                });
+            } else {
+                // Nếu biểu đồ nhiệt độ đã tồn tại, cập nhật dữ liệu và vẽ lại biểu đồ
+                temperatureChart.data.labels.push(time);
+                temperatureChart.data.datasets[0].data.push(temp);
+
+                // Giới hạn số lượng điểm trên biểu đồ để tránh quá tải trình duyệt
+                const maxDataPoints = 10;
+                if (temperatureChart.data.labels.length > maxDataPoints) {
+                    temperatureChart.data.labels.shift();
+                    temperatureChart.data.datasets[0].data.shift();
+                }
+
+                temperatureChart.update(); // Vẽ lại biểu đồ
+            }
+        }
+
+        function updateHumidityChart(humi) {
+            const time = new Date().toLocaleTimeString(); // Lấy thời gian hiện tại
+
+            // Kiểm tra nếu biểu đồ độ ẩm chưa được khởi tạo
+            if (!humidityChart) {
+                // Nếu chưa, khởi tạo biểu đồ độ ẩm mới
+                humidityChart = new Chart("humidityChart", {
+                    type: "line", // Chọn loại biểu đồ là biểu đồ đường
+                    data: {
+                        labels: [time], // Sử dụng thời gian làm nhãn trục x
+                        datasets: [{
+                            label: 'Humidity (%)',
+                            borderColor: 'blue',
+                            data: [humi]
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time', // Sử dụng kiểu dữ liệu thời gian cho trục x
+                                time: {
+                                    unit: 'minute' // Đơn vị thời gian là phút
+                                }
+                            },
+                            y: { // Cấu hình trục tung
+                                title: {
+                                    display: true,
+                                    text: 'Humidity (%)' // Đặt tiêu đề của trục tung
+                                }
+                            }
+                        },
+                        legend: { display: true },
+                        title: {
+                            display: true,
+                            text: "Humidity Data Over Time"
+                        }
+                    }
+                });
+            } else {
+                // Nếu biểu đồ độ ẩm đã tồn tại, cập nhật dữ liệu và vẽ lại biểu đồ
+                humidityChart.data.labels.push(time);
+                humidityChart.data.datasets[0].data.push(humi);
+
+                // Giới hạn số lượng điểm trên biểu đồ để tránh quá tải trình duyệt
+                const maxDataPoints = 10;
+                if (humidityChart.data.labels.length > maxDataPoints) {
+                    humidityChart.data.labels.shift();
+                    humidityChart.data.datasets[0].data.shift();
+                }
+
+                humidityChart.update(); // Vẽ lại biểu đồ
+            }
+        }
+
+        function updateLuxChart(lux) {
+            const time = new Date().toLocaleTimeString(); // Lấy thời gian hiện tại
+
+            // Kiểm tra nếu biểu đồ nhiệt độ chưa được khởi tạo
+            if (!luxChart) {
+                // Nếu chưa, khởi tạo biểu đồ nhiệt độ mới
+                luxChart = new Chart("luxChart", {
+                    type: "line", // Chọn loại biểu đồ là biểu đồ đường
+                    data: {
+                        labels: [time], // Sử dụng thời gian làm nhãn trục x
+                        datasets: [{
+                            label: 'lux',
+                            borderColor: 'yellow',
+                            data: [lux]
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time', // Sử dụng kiểu dữ liệu thời gian cho trục x
+                                time: {
+                                    unit: 'minute' // Đơn vị thời gian là phút
+                                }
+                            },
+                            y: { // Cấu hình trục tung
+                                title: {
+                                    display: true,
+                                    text: 'lux' // Đặt tiêu đề của trục tung
+                                }
+                            }
+                        },
+                        legend: { display: true },
+                        title: {
+                            display: true,
+                            text: "Lux Data Over Time"
+                        }
+                    }
+                });
+            } else {
+                // Nếu biểu đồ nhiệt độ đã tồn tại, cập nhật dữ liệu và vẽ lại biểu đồ
+                luxChart.data.labels.push(time);
+                luxChart.data.datasets[0].data.push(lux);
+
+                // Giới hạn số lượng điểm trên biểu đồ để tránh quá tải trình duyệt
+                const maxDataPoints = 10;
+                if (luxChart.data.labels.length > maxDataPoints) {
+                    luxChart.data.labels.shift();
+                    luxChart.data.datasets[0].data.shift();
+                }
+
+                luxChart.update(); // Vẽ lại biểu đồ
+            }
+        }
+    </script>
+
+</body>
+</html>

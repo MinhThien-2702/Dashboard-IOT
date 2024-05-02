@@ -1,0 +1,856 @@
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== Globals ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #2a2185;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+/* =============== Navigation ================ */
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: 300px;
+  }
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    grid-template-columns: 1fr;
+  }
+  .recentOrders {
+    overflow-x: auto;
+  }
+  .status.inProgress {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+  .user {
+    min-width: 40px;
+  }
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .toggle {
+    z-index: 10001;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 0;
+    left: initial;
+  }
+}
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: #48acd3;
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active {
+  width: 80px;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background-color: var(--white);
+}
+
+.navigation ul li:nth-child(1) {
+  pointer-events: none;
+}
+
+.navigation ul li a {
+  margin: 15px;
+  display: block;
+  display: flex;
+  text-decoration: none;
+  color: var(--white);
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--blue);
+}
+
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;
+}
+.navigation ul li a .icon ion-icon {
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+/* --------- curve outside ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+}
+
+.navigation ul li {
+  transition: background-color 0.3s ease; /* Thêm hiệu ứng màu nền */
+}
+
+.navigation ul li a::before,
+.navigation ul li a::after {
+  transition: all 0.3s ease; /* Thêm hiệu ứng cho phần cong ngoài */
+}
+
+.navigation.active ul li {
+  width: 80px; /* Đảm bảo các mục vẫn giữ nguyên kích thước khi thu gọn */
+}
+
+.navigation.active ul li:hover a::before,
+.navigation.active ul li.hovered a::before,
+.navigation.active ul li:hover a::after,
+.navigation.active ul li.hovered a::after {
+  width: 0; /* Ẩn phần cong ngoài khi thanh điều hướng thu gọn */
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background-color: #A7FFEB; /* Màu xanh nhạt */
+  box-shadow: 0 0 10px rgba(167, 255, 235, 0.5); /* Đổi giá trị rgba để thay đổi màu đổ bóng */
+}
+.navigation ul li a .title {
+  font-family: 'Roboto', sans-serif; /* Thay đổi phông chữ */
+  font-weight: bold; /* Đặt đậm cho phông chữ */
+}
+
+.logo-item {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.logo-item .title {
+  margin-left: 10px; /* Khoảng cách giữa logo và chữ "SMART HOME" */
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+
+/* ===================== Main ===================== */
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.search {
+  position: relative;
+  width: 400px;
+  margin: 0 10px;
+}
+
+.search label {
+  position: relative;
+  width: 100%;
+}
+
+.search label input {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  font-size: 18px;
+  outline: none;
+  border: 1px solid var(--black2);
+}
+
+.search label ion-icon {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 1.2rem;
+}
+
+.user {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Định dạng các biểu tượng trong topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+}
+
+.topbar .toggle,
+.topbar .search,
+.topbar .notification,
+.topbar .account {
+  margin-right: 10px; /* Khoảng cách giữa các phần */
+}
+
+.topbar ion-icon {
+  font-size: 33px; /* Kích thước của biểu tượng */
+  color: #000; /* Màu sắc của biểu tượng */
+}
+
+/* Định dạng cho phần tìm kiếm */
+
+
+/* Định dạng biểu tượng khi hover */
+.topbar ion-icon:hover {
+  color: #666; /* Màu sắc khi hover */
+  cursor: pointer; /* Chuyển đổi con trỏ khi hover */
+}
+
+
+
+/* ======================= Cards ====================== */
+.cardBox {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+}
+
+.cardBox .card {
+  position: relative;
+  padding: 23px;
+  border-radius: 15cm;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardBox .card .numbers {
+  position: relative;
+  font-weight: 50;
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+.cardBox .card .cardName {
+  color: var(--black2);
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+.cardBox .card .iconBx {
+  font-size: 3.5rem;
+  color: var(--black2);
+}
+
+.cardBox .card:hover {
+  background: var(--blue);
+}
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx {
+  color: var(--white);
+}
+
+
+.card {
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc; /* Optional: Add border for card */
+  border-radius: 8px; /* Optional: Add border radius for card */
+}
+
+.icon-container {
+  margin-right: 10px;
+}
+
+.temperature-icon::before,
+.humidity-icon::before,
+.lux-icon::before,
+.distance-icon::before,
+.move-icon::before {
+  font-size: 40px; /* Adjust the font size to increase the icon size */
+}
+
+.temperature-icon::before {
+  content: "🌡"; /* Unicode or font-awesome icons can be used here */
+}
+
+.humidity-icon::before {
+  content: "💧"; /* Unicode or font-awesome icons can be used here */
+}
+
+.move-icon::before {
+  content: "🚶"; /* Unicode or font-awesome icons can be used here */
+}
+
+.lux-icon::before {
+  content: "☀️"; /* Unicode icon for sun */ /* Unicode or font-awesome icons can be used here */
+}
+
+.distance-icon::before {
+  content: "\1F4CF"; /* Unicode icon for pencil */
+}
+.value-container {
+  flex: 1;
+}
+
+.values {
+  display: flex;
+  flex-direction: column;
+}
+
+.value-item {
+  margin-bottom: 5px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  margin-left: 10px;
+}
+
+.equipmentContainer .equipmentTabContainer .light img,
+.equipmentContainer .equipmentTabContainer .fan img,
+.equipmentContainer .equipmentTabContainer .TV img {
+    width: 200px; /* Điều chỉnh kích thước chiều rộng mong muốn */
+    height: 200px; /* Đảm bảo tỷ lệ khung hình được duy trì */
+}
+
+
+
+.TV
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+}
+img.light_on {
+    width: 200px;
+    height: 200px;
+}
+img.light_off {
+    width: 200px;
+    height: 200px;
+}
+img.fan_on {
+    width: 200px;
+    height: 200px;
+}
+img.fan_off {
+    width: 200px;
+    height: 200px;
+}
+img.TV_on {
+    width: 200px;
+    height: 200px;
+}
+img.TV_off {
+    width: 200px;
+    height: 200px;
+}
+
+.equipmentContainer .equipmentTitle
+{
+    font-family: "Orbitron", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    font-size: 15px;
+    height: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+.equipmentContainer .equipmentTabContainer
+{
+    display: flex;
+    justify-content: space-around;
+    height: 85%;
+    
+}
+
+/* ================== Order Details List ============== */
+.details {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 30px;
+  /* margin-top: 10px; */
+}
+
+.details .recentOrders {
+  position: relative;
+  display: grid;
+  min-height: 500px;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+
+.details .cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cardHeader h2 {
+  font-weight: 600;
+  color: var(--blue);
+}
+.cardHeader .btn {
+  position: relative;
+  padding: 5px 10px;
+  background: var(--blue);
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 6px;
+}
+
+.details table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.details table thead td {
+  font-weight: 600;
+}
+.details .recentOrders table tr {
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.details .recentOrders table tr:last-child {
+  border-bottom: none;
+}
+.details .recentOrders table tbody tr:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+.details .recentOrders table tr td {
+  padding: 10px;
+}
+.details .recentOrders table tr td:last-child {
+  text-align: end;
+}
+.details .recentOrders table tr td:nth-child(2) {
+  text-align: end;
+}
+.details .recentOrders table tr td:nth-child(3) {
+  text-align: center;
+}
+.status.delivered {
+  padding: 2px 4px;
+  background: #8de02c;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.status.pending {
+  padding: 2px 4px;
+  background: #e9b10a;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.status.return {
+  padding: 2px 4px;
+  background: #f00;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.status.inProgress {
+  padding: 2px 4px;
+  background: #1795ce;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.recentCustomers {
+  position: relative;
+  display: grid;
+  min-height: 500px;
+  padding: 20px;
+  background: var(--white);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+.recentCustomers .imgBx {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.recentCustomers .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recentCustomers table tr td {
+  padding: 12px 10px;
+}
+.recentCustomers table tr td h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2rem;
+}
+.recentCustomers table tr td h4 span {
+  font-size: 14px;
+  color: var(--black2);
+}
+.recentCustomers table tr:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+.recentCustomers table tr:hover td h4 span {
+  color: var(--white);
+}
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: 300px;
+  }
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    grid-template-columns: 1fr;
+  }
+  .recentOrders {
+    overflow-x: auto;
+  }
+  .status.inProgress {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+  .user {
+    min-width: 40px;
+  }
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .toggle {
+    z-index: 10001;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 0;
+    left: initial;
+  }
+}
+
+
+
+/*------------------------------- Phần tài làm------------------------------------------------------*/
+
+.title-name {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Điều chỉnh chiều cao của thẻ */
+/*    background-color: #A7FFEB;
+  background-image: url('https://bizweb.dktcdn.net/100/438/408/files/anh-chill-buon-yodyvn5.jpg?v=1684810825447');  /*Thay đổi đường dẫn đến hình ảnh */
+/*    background-size: cover; /* Đảm bảo hình ảnh đầy đủ kích thước trong phần tử */
+/*    background-position: center; /* Canh chỉnh hình ảnh ở trung tâm */
+  color: #4d5467; /* Màu chữ */
+  text-align: center; /* Căn chỉnh văn bản vào giữa */
+  padding: 20px; /* Khoảng cách nội dung từ lề */
+}
+.custom-hr {
+  border: 0;                    /* Loại bỏ đường viền mặc định */
+  height: 5px;                  /* Độ dày của đường kẻ */
+  background-color: rgb(255, 255, 255);    /* Màu của đường kẻ */
+}
+.custom-hr-plus {
+  border: 0;                    /* Loại bỏ đường viền mặc định */
+  height: 300px;                  /* Độ dày của đường kẻ */
+  background-color: rgb(255, 255, 255);    /* Màu của đường kẻ */
+}
+
+.title-name p {
+  font-size: 5rem; /* Kích thước chữ */
+  text-shadow: 12px 8px 12px rgb(190, 172, 174);
+  margin-top: 10px; /* Khoảng cách từ hình ảnh đến dòng chữ */
+}
+
+/*-------------------------------------------------------------------------------------*/
+
+/*--- Thiết lập trạng thái dữ liệu ---*/
+.container {
+  margin-left: 10px;
+  display: flex;
+  flex-wrap: nowrap; /* Không cho phép các thẻ tự động xuống hàng */
+}
+.chart {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.value {
+  font-size: 60px;
+}
+
+.box-lux,
+.box-temperature,
+.box-humidity {
+  display: flex; /* Sử dụng flexbox */
+  flex-direction: column; /* Định hướng theo cột */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  text-align: center; /* Căn giữa văn bản */
+  height: 360px; /* Chiều cao của box */
+  width: 30vw;
+  background-color: #ffffff; /* Màu nền */
+  border-radius: 115px; /* Bo tròn tất cả các góc */
+  flex-grow: 1; /* Cho phép hộp mở rộng để điền vào không gian trống */
+}
+.chart-Lux,
+.chart-Temp,
+.chart-Humi {
+  background-color: rgba(255, 255, 255, 0.9);
+  height: auto; /* Chiều cao của box (ví dụ) */
+  width: 55vw;
+  border-radius: 25px; /* Bo tròn tất cả các góc */
+  border: 3px solid #f9e6e6; /* Viền đậm 3px */
+  box-shadow: 0 0 10px rgba(220, 219, 219, 0.5); /* Đổ bóng cho viền */
+}
+
+
+/*-------------------------------------------------------------------------------------*/
+
+/*--- footer ---*/
+.footer {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;                                  /* Đảm bảo bảng hiển thị trên các phần tử khác */
+  background-color: rgba(244, 244, 244, 0.8);   /* Màu nền mờ cho bảng */
+  padding: 1px 0;
+  text-align: center;
+}
+
+.table {
+  display: flex; /* Sử dụng flexbox để căn đều các cột */
+  justify-content: space-between; /* Căn đều mỗi cột */
+  width: 100%;                    /* Chiều rộng của bảng */
+  border-collapse: collapse;      /* Xóa khoảng cách giữa các ô */
+}
+.sqr {
+  flex: 1;
+  padding: 20px;                                    /* Khoảng cách giữa nội dung và viền box */
+  border-radius: 0px;                              /* Bo tròn góc của box */
+  box-shadow: 0 0 10px rgba(255, 1, 1, 0);        /* Tạo bóng cho box */
+}
+.address, .inform, .preview {
+  text-align: center;                                /* Căn giữa nội dung trong các ô */
+}
+.address {
+  width: 40vw;
+}
+.inform {
+  color:#007bff;
+  width: 30vw;
+}
+.inform1 {
+  width: 20vw;
+}
+.inform2 {
+  width: 20vw; 
+}
+.inform3 {
+  width: 20vw;
+}
+
+.support-list {
+  list-style-type: none;
+  padding: 0;
+}
+.support-list li {
+  display: inline-block;
+  margin: 0 10px;
+}
+.support-list li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+.support-list li a:hover {
+  color: #007bff;
+}

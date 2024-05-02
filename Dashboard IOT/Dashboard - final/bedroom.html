@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART HOME TT IOT</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/Phòng Ngủ.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li class="logo-item">
+                    <a href="#">
+                        <span class="icon">
+                            <img src="assets/imgs/Hcmute-logo.png" alt="icon">
+                        </span>
+                        <span class="title">SMART HOME</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Phòng khách</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#"> 
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Phòng ngủ</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="outdoor.html">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Ngoài trời</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://wokwi.com/projects/395121725887881217"target="_blank">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Cài đặt</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="pass.html"> 
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Đăng xuất</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+            
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+            
+                <div class="notification">
+                    <ion-icon name="notifications-outline"></ion-icon> <!-- Biểu tượng thông báo -->
+                </div>
+            
+                <div class="account">
+                    <ion-icon name="person-circle-outline"></ion-icon> <!-- Biểu tượng tài khoản -->
+                </div>
+            </div>
+            <h1 class="highlighted">
+                Phòng Ngủ
+                <span class="icon">&#x1F6CC;</span>
+            </h1>
+            <div class="sensor">
+                <h2>Giá trị cảm biến</h2>
+            </div>
+
+            <!-- ======================= Cards ================== -->
+         <div class="BG">
+            <div class="cardBox">
+                <div class="card">
+                    <div class="icon-container">
+                        <div class="temperature-icon"></div>
+                    </div>
+                    <div class="value-container">
+                        <div class="values">
+                            <div class="value-item">
+                                <h1 class="label">Nhiệt độ: </h1>
+                                <h1 class="value" id="temperature">null&#8451;</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <div class="icon-container">
+                        <div class="humidity-icon"></div>
+                    </div>
+                    <div class="value-container">
+                        <div class="values">
+                            <div class="value-item">
+                                <h1 class="label">Độ ẩm: </h1>
+                                <h1 class="value" id="humidity">null%</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <div class="card">
+                    <div class="icon-container">
+                        <div class="lux-icon"></div>
+                    </div>
+                    <div class="value-container">
+                        <div class="values">
+                            <div class="value-item">
+                                <h1 class="label">Ánh sáng </h1>
+                                <h1 class="value" id="lux">null</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon-container">
+                        <div class="move-icon"></div>
+                    </div>
+                    <div class="value-container">
+                        <div class="values">
+                            <div class="value-item">
+                                <h1 class="label">Motion: </h1>
+                                <h1 class="value" id="move">null</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="equipmentContainer">
+                <div class="sensor">
+                    <h2>Thiết bị</h2>
+                </div>
+                <div class="equipmentTabContainer">
+                        <div class="light">
+                            <img src="assets/imgs/den_off.png" class="light_on" id="light" alt="">
+                            <div class="boxbutton1">
+                                <label class="switch">
+                                    <input type="checkbox" onclick="toggleLight()" id="lightSwitch">
+                                    <span class="slider"></span>
+                                </label>    
+                            </div>
+                        </div>
+                        <div class="fan">
+                            <img src="assets/imgs/maylanh_off.png" class="fan_on" id="fan" alt="">
+                            <div class="boxbutton2">
+                                <label class="switch">
+                                    <input type="checkbox" onclick="toggleFan()" id="fanSwitch">
+                                    <span class="slider"></span>
+                                </label>    
+                            </div>
+                        </div>
+                        <div class="TV">
+                            <img src="assets/imgs/remcua_off.jpeg" class="TV_on" id="TV" alt="">
+                            <div class="boxbutton3">
+                                <label class="switch">
+                                    <input type="checkbox" onclick="toggleTV()" id="TVSwitch">
+                                    <span class="slider"></span>
+                                </label>    
+                            </div>
+                        </div>
+        
+                </div>
+            </div>
+            
+            
+            <footer class="footer">
+                <table class="table">
+                    <tr>
+                        <td class="sqr address">
+                            <p><a href="https://maps.app.goo.gl/3oys3jHJ9VvoxC2u9" target="_blank">
+                                Trường đại học Sư phạm kỹ thuật thành phố Hồ Chí Minh.
+                            </a></p>
+                        </td>
+                        <td class="sqr inform">
+                            <p>Thực tập cơ sở ứng dụng IOT<br/>Thành viên thực hiện</p>
+                        </td>
+                        <td class="sqr inform1">
+                            <p>Huỳnh Tấn Tài<br/>Mssv: 21119354</p>
+                        </td>
+                        <td class="sqr inform2">
+                            <p>Nguyễn Thiên Tài<br/>Mssv: 21119355</p>
+                        </td>
+                        <td class="sqr inform3">
+                            <p>Nguyễn Minh Thiện<br/>Mssv: 21119358</p>
+                        </td>
+                    </tr>
+                </table>        
+                <hr>
+                <div class="support-info">
+                    <ul class="support-list">
+                        <li><a href="https://www.facebook.com/huynhtantai2502" target="_blank" >Liên hệ hỗ trợ</a></li>
+                        <li><a>||</a></li>
+                        <li>Số điện thoại tiếp nhận khiếu nại: <a href="tel:0123456789">0123456789</a></li>
+                    </ul>
+                </div>
+            </footer>  
+        </div>   
+            
+
+            <!-- ================ Order Details List ================= -->
+        </div>
+
+        
+    </div>
+
+
+    
+    <!-- =========== Scripts =========  -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+
+<script type="module">
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration here (Do not use the existing configuration)
+const firebaseConfig = {
+    apiKey: "AIzaSyDIyRrLe3oo3yomPvyaq_dXESagra71WDw",
+    authDomain: "dht11-f8fe7.firebaseapp.com",
+    databaseURL: "https://dht11-f8fe7-default-rtdb.firebaseio.com",
+    projectId: "dht11-f8fe7",
+    storageBucket: "dht11-f8fe7.appspot.com",
+    messagingSenderId: "353711291899",
+    appId: "1:353711291899:web:7f15e3ade9f7d59397df5e",
+    measurementId: "G-B0969Q45MS"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+// getting reference to the database
+var database = firebase.database();
+
+//getting reference to the data we want
+var dataRef1 = database.ref('phongngu/do am');
+var dataRef2 = database.ref('phongngu/nhiet do');
+var dataRef3 = database.ref('phongngu/chuyen dong');
+var dataRef4 = database.ref('phongngu/lamp');
+var dataRef5 = database.ref('phongngu/khoang cach');
+var dataRef6 = database.ref('phongngu/do sang');
+
+    //fetch the data
+    dataRef1.on('value', function(getdata1){
+        var humi = getdata1.val();
+        document.getElementById('humidity').innerHTML = humi + "%";
+    })
+        
+    dataRef2.on('value', function(getdata2){
+        var temp = getdata2.val();
+        document.getElementById('temperature').innerHTML = temp + "&#8451;";
+    })        
+    dataRef6.on('value', function(getdata6){
+        var luxx = getdata6.val();
+        document.getElementById('lux').innerHTML = luxx;
+
+    })
+
+        
+        dataRef4.on('value', function(getdata4){
+        var lamp = getdata4.val();
+        var fanImageElement = document.getElementById('fan');
+    })
+
+        dataRef3.on('value', function(getdata3){
+        var move = getdata3.val();
+        var lightImageElement = document.getElementById('light');
+        document.getElementById('move').innerHTML = move;
+
+        })
+        dataRef5.on('value', function(getdata5){
+        var door = getdata5.val();
+        var doorImageElement = document.getElementById('TV');
+        document.getElementById('distance').innerHTML = door;
+        
+    });
+    
+    
+    </script>
+    
+</body>
+
+</html>
